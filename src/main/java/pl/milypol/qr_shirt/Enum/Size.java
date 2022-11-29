@@ -1,4 +1,4 @@
-package pl.milypol.qr_shirt.Enum;
-
-public enum Size {
-}
+//package pl.milypol.qr_shirt.Enum;
+//
+//public enum Size {
+//}
