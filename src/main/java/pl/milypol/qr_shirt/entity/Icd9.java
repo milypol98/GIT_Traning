@@ -1,6 +1,9 @@
 package pl.milypol.qr_shirt.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,9 @@ import javax.persistence.Id;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class Icd9 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +23,6 @@ public class Icd9 {
     private String kod;
     private String opis;
     private String poziom;
-
 
 
 }

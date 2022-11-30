@@ -1,12 +1,13 @@
 package pl.milypol.qr_shirt.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.milypol.qr_shirt.entity.Icd9;
 import pl.milypol.qr_shirt.repository.Icd9Repository;
 
 import java.util.*;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -16,48 +17,50 @@ public class HomeController {
         this.icd9Repository = icd9Repository;
     }
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
-        return "test";
+        return "home";
     }
 
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String about() {
         return "search";
     }
-    @GetMapping("/searchicd9")
-    public String SearchIcd9(@RequestParam String search,Model model){
+    @RequestMapping(value = "/searchicd9")
+    @ResponseBody
+    public Set<Icd9> SearchIcd9(@RequestParam String search){
         Set<Icd9> searchicd9 = new HashSet<>();
         searchicd9.addAll(icd9Repository.findaLLIcd9ByKod(search));
         searchicd9.addAll(icd9Repository.findAllIcd9ByOpis(search));
-        model.addAttribute("seaarchIcd9" , searchicd9);
-        return "listIcd9";
+        System.out.println(searchicd9);
+        return searchicd9;
     }
 
-    //    @GetMapping("/test")
-//    @ResponseBody
-//    @Secured("ROLE_ADMIN")
-//    public String test() { return "test"; }
-    @GetMapping("/icd9Table")
-    public String listIcd9(Model model) {
-        model.addAttribute("listIcd9Scope",icd9Repository.listIcd9ByScope("0"));
-        return "icd9List";
+    @RequestMapping(value = {"/icd9Table"}, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Icd9> listIcd9() {
+        List<Icd9> list = icd9Repository.listIcd9ByScope("0");
+        System.out.println(list);
+        return list;
     }
-    @GetMapping("/icd9More")
-    public String moreListIcd9(@RequestParam String code,Model model){
+    @RequestMapping(value = {"/icd9More"})
+    @ResponseBody
+    public List<Icd9> moreListIcd9(@RequestParam String code){
         String[] splitCode = code.split("-");
-        model.addAttribute("listByScope",icd9Repository.listIcd9ByLevelBetween(splitCode[0],splitCode[1]));
+        List<Icd9> list = icd9Repository.listIcd9ByLevelBetween(splitCode[0],splitCode[1]);
         System.out.println(icd9Repository.listIcd9ByLevelBetween(splitCode[0],splitCode[1]));
-        return "listIcd9Scope";
+        return list;
     }
-    @GetMapping("/icd9Detalis")
-    public String listIcd9Detalis(@RequestParam String code, Model model){
+    @RequestMapping(value = "/icd9Detalis")
+    @ResponseBody
+    public List<Icd9> listIcd9Detalis(@RequestParam String code){
+        List<Icd9> list = new ArrayList<>();
         if (icd9Repository.listIcd9ByCode(code + "_").size() != 0){
-            model.addAttribute("listByDetalis",icd9Repository.listIcd9ByCode(code + "_"));
+            list.addAll(icd9Repository.listIcd9ByCode(code+"_"));
         }else {
-            model.addAttribute("listByDetalis",icd9Repository.listIcd9ByCode(code + "__"));
+            list.addAll(icd9Repository.listIcd9ByCode(code+"__"));
         }
-        return "icd9ListByDetalis";
+        return list;
     }
 }
 
