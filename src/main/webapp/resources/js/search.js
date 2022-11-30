@@ -15,10 +15,7 @@ const button = document.querySelector("#icd9Table");
 button.addEventListener("click",function (event){
     window.location.href ="/about"
 })
-const buttonAdd = document.querySelector("#addIcd9")
-buttonAdd.addEventListener("click",function (event){
 
-})
 
 // function searchIcd9(searchValue) {
 //     fetch("/searchicd9?search=" + searchValue)

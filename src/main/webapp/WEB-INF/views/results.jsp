@@ -18,9 +18,15 @@
         <td>${icd9.kod}</td>
         <td>${icd9.opis}</td>
         <td>${icd9.zakres}</td>
-        <td><button id="addIcd9">wstaw</button> </td>
+        <td><button id="addIcd9" value="${icd9.kod} ${icd9.opis}">wstaw</button> </td>
     </tr>
 </c:forEach>
 </table>
+<button>
+    Strona gowna
+    <a href="<c:url  value="/"/> "></a>
+</button>
+<script src="../../resources/js/button.js"></script>
+
 </body>
 </html>
