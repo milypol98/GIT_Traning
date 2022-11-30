@@ -2,6 +2,7 @@ package pl.milypol.qr_shirt.controller;
 
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.milypol.qr_shirt.entity.Icd9;
 import pl.milypol.qr_shirt.repository.Icd9Repository;
@@ -24,16 +25,15 @@ public class HomeController {
 
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String about() {
-        return "search";
+        return "JS";
     }
     @RequestMapping(value = "/searchicd9")
-    @ResponseBody
-    public Set<Icd9> SearchIcd9(@RequestParam String search){
+    public String SearchIcd9(@RequestParam String search, Model model) {
         Set<Icd9> searchicd9 = new HashSet<>();
         searchicd9.addAll(icd9Repository.findaLLIcd9ByKod(search));
         searchicd9.addAll(icd9Repository.findAllIcd9ByOpis(search));
-        System.out.println(searchicd9);
-        return searchicd9;
+        model.addAttribute("searchicd9", searchicd9);
+        return "results";
     }
 
     @RequestMapping(value = {"/icd9Table"}, produces = MediaType.APPLICATION_JSON_VALUE)

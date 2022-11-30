@@ -12,13 +12,6 @@
 </head>
 <body>
 <main>
-    <div class="searchBox">
-        <input
-                id="pokemonName"
-                type="Pokemon name"
-                placeholder="Pokemon name"
-        />
-    </div>
 
     <table class="codesIcd9">
 

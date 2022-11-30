@@ -98,31 +98,7 @@ function getIcd9(){
 }
 getIcd9();
 
-const input =document.querySelector("#pokemonName");
-input.addEventListener("keypress" , function (event){
-    if (event.key ==="Enter"){
-        searchIcd9(input.value);
-    }
-})
 
-function searchIcd9(searchValue) {
-    fetch("/searchicd9?search=" + searchValue)
-        .then((response)=>response.json())
-        .then((data)=>{
-            console.log(data)
-            document.querySelector(".codesIcd9").innerHTML ='';
-            for (var i=0; i < data.length; i++){
-                document.querySelector(".codesIcd9").innerHTML +=`
-         <tr class="pokemonInfos">
-        <td>${data[i].kod}</td>
-        <td>${data[i].opis}</td>   
-      </tr>`;
-            }
-        })
-        .catch((err)=>{
-            console.log("Not Found si",err)
-        })
-}
 
 
 
