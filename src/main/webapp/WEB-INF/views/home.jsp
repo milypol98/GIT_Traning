@@ -20,14 +20,12 @@
     <button id="search">🔎</button>
     <button id="icd9Table"> ICD9</button>
 <br/>
-    <textarea id="w3review" name="w3review" rows="4" cols="50" placeholder="Badania">
-
-</textarea>
+<div id="icd9"></div>
 </div>
 <table class="codesIcd9">
 
 </table>
-
+<script src="../../resources/js/takeIcd9.js"></script>
 <script src="../../resources/js/search.js"></script>
 </body>
 </html>
