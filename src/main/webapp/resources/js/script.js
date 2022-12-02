@@ -5,7 +5,7 @@ button.forEach(btn =>{
     });
 })
 function notNull(searchValue) {
-    fetch("icd9Detalis?code=" + searchValue)
+    fetch("icd9NextElement?code=" + searchValue)
         .then((response)=>response.json())
         .then((data)=>{
             console.log(data)
@@ -14,7 +14,6 @@ function notNull(searchValue) {
                 nextButton.forEach(btn=>{
                     if (btn.value === searchValue){
                         btn.parentElement.innerText= "";
-                        console.log(btn.innerText);
                     }
                 })
 

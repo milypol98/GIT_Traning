@@ -56,6 +56,17 @@ public class HomeController {
         }
         return list;
     }
+    @RequestMapping(value = "/icd9NextElement")
+    @ResponseBody
+    public List<Icd9> icd9NextElement(@RequestParam String code){
+        List<Icd9> list = new ArrayList<>();
+        if (icd9Repository.listIcd9ByCodeLimitOne(code + "_").size() != 0){
+            list.addAll(icd9Repository.listIcd9ByCodeLimitOne(code+"_"));
+        }else {
+            list.addAll(icd9Repository.listIcd9ByCodeLimitOne(code+"__"));
+        }
+        return list;
+    }
 }
 
 
