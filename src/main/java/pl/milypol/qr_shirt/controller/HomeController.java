@@ -23,25 +23,19 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
-    public String about() {
-        return "JS";
-    }
     @RequestMapping(value = "/searchicd9")
     public String SearchIcd9(@RequestParam String search, Model model) {
-        Set<Icd9> searchicd9 = new HashSet<>();
-        searchicd9.addAll(icd9Repository.findaLLIcd9ByKod(search));
-        searchicd9.addAll(icd9Repository.findAllIcd9ByOpis(search));
-        model.addAttribute("searchicd9", searchicd9);
+        Set<Icd9> searchICD9 = new HashSet<>();
+        searchICD9.addAll(icd9Repository.findaLLIcd9ByKod(search));
+        searchICD9.addAll(icd9Repository.findAllIcd9ByOpis(search));
+        model.addAttribute("searchicd9", searchICD9);
         return "results";
     }
 
-    @RequestMapping(value = {"/icd9Table"}, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public List<Icd9> listIcd9() {
-        List<Icd9> list = icd9Repository.listIcd9ByScope("0");
-        System.out.println(list);
-        return list;
+    @RequestMapping(value = {"/icd9Table"})
+    public String listIcd9(Model model) {
+        model.addAttribute("icd9Table",icd9Repository.listIcd9ByScope("0"));
+        return "JS";
     }
     @RequestMapping(value = {"/icd9More"})
     @ResponseBody
@@ -59,6 +53,17 @@ public class HomeController {
             list.addAll(icd9Repository.listIcd9ByCode(code+"_"));
         }else {
             list.addAll(icd9Repository.listIcd9ByCode(code+"__"));
+        }
+        return list;
+    }
+    @RequestMapping(value = "/icd9NextElement")
+    @ResponseBody
+    public List<Icd9> icd9NextElement(@RequestParam String code){
+        List<Icd9> list = new ArrayList<>();
+        if (icd9Repository.listIcd9ByCodeLimitOne(code + "_").size() != 0){
+            list.addAll(icd9Repository.listIcd9ByCodeLimitOne(code+"_"));
+        }else {
+            list.addAll(icd9Repository.listIcd9ByCodeLimitOne(code+"__"));
         }
         return list;
     }

@@ -18,4 +18,6 @@ public interface Icd9Repository extends JpaRepository<Icd9,Long> {
     @Query(value = "select * from icd9 where opis LIKE %?% AND poziom IS NOT NULL", nativeQuery = true)
     List<Icd9> findAllIcd9ByOpis(String description);
 
+    @Query(value = "select * from icd9 where kod LIKE ? LIMIT 1", nativeQuery= true)
+    List<Icd9> listIcd9ByCodeLimitOne(String code);
 }

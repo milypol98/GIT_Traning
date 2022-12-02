@@ -16,16 +16,21 @@
 <main>
 
     <table class="codesIcd9">
-
+        <c:forEach items="${icd9Table}" var="icd9">
+            <tr class="pokemonInfos">
+                <td id="code">${icd9.kod}</td>
+                <td id="description">${icd9.opis}</td>
+                <td id="nextButton"><button id="next"  value="${icd9.kod}">Wiecej →</button> </td>
+            </tr>
+        </c:forEach>
     </table>
 </main>
 <br/>
-<button>
+<button id = "mainPage">
     Strona gowna
-    <a href="<c:url  value="/"/> "></a>
 </button>
 
+<script src="../../resources/js/mainPageButton.js"></script>
 <script src="../../resources/js/script.js"></script>
-
 </body>
 </html>

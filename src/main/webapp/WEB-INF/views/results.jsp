@@ -15,18 +15,17 @@
 <table class="codesIcd9">
 <c:forEach items="${searchicd9}" var="icd9">
     <tr>
-        <td>${icd9.kod}</td>
-        <td>${icd9.opis}</td>
-        <td>${icd9.zakres}</td>
-        <td><button id="addIcd9" value="${icd9.kod} ${icd9.opis}">wstaw</button> </td>
+        <td id ="code">${icd9.kod}</td>
+        <td id ="description">${icd9.opis}</td>
+        <td><button id="addIcd9" value="${icd9.kod}${icd9.opis}">Dodaj +</button> </td>
     </tr>
 </c:forEach>
 </table>
-<button>
+<button id="mainPage">
     Strona gowna
-    <a href="<c:url  value="/"/> "></a>
 </button>
-<script src="../../resources/js/button.js"></script>
 
+<script src="../../resources/js/giveIcd9.js"></script>
+<script src="../../resources/js/mainPageButton.js"></script>
 </body>
 </html>
