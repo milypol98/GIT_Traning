@@ -34,11 +34,17 @@ function detalistIcd9(searchValue) {
         <td>${data[i].kod}</td>
         <td>${data[i].opis}</td>   
         <td id="nextButton"><button id="next"  value="${data[i].kod}">Wiecej →</button> </td>
-        <td ><button id="addIcd9"  value="${data[i].kod}${data[i].opis}">Dodaj +</button> </td>            
+        <td><button id="addIcd9" value="${data[i].kod} ${data[i].opis}">Dodaj +</button> </td>    
       </tr>
-      
+                
         `;
-
+                const addIcd9Button = document.querySelectorAll("#addIcd9");
+                addIcd9Button.forEach(btn => {
+                    console.log('Kosmo');
+                    btn.addEventListener("click",evt => {
+                        window.location.href = '/' + '#' + evt.target.value;
+                    });
+                })
                 const button = document.querySelectorAll("#next");
                 button.forEach(btn =>{
                     btn.addEventListener("click",evt => {

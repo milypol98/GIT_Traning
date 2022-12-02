@@ -24,7 +24,6 @@
 <button id="mainPage">
     Strona gowna
 </button>
-
 <script src="../../resources/js/giveIcd9.js"></script>
 <script src="../../resources/js/mainPageButton.js"></script>
 </body>
